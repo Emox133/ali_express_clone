@@ -1,13 +1,13 @@
 import React from 'react'
 import {StyleSheet, View} from 'react-native'
 import SearchProducts from '../../components/UI/SearchProducts';
-import SupportPages from '../../components/UI/SupportPages'
+import SupportBoxes from '../../components/UI/SupportBoxes'
 
-const ProductsScreen = () => {
+const ProductsScreen = (props) => {
     return (
         <View style={styles.screen}>
             <SearchProducts />
-            <SupportPages />
+            <SupportBoxes navigation={props.navigation} />
         </View>
     )
 }

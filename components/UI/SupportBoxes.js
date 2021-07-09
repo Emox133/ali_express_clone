@@ -2,11 +2,11 @@ import React from 'react'
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { Text } from '@ui-kitten/components'
 
-const SupportPages = () => {
+const SupportBoxes = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={styles.flexContainer}>
-                <TouchableOpacity style={styles.box}>
+                <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('Support')}>
                     <Text style={styles.title} category="c1">
                         Sigurno plaćanje
                     </Text>
@@ -14,7 +14,7 @@ const SupportPages = () => {
                             <Image style={styles.image} source={require('./../../assets/secure-payments.png')} />
                         </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.box}>
+                <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('Support')}>
                     <Text style={styles.title} category="c1">
                         Garancija na povrat novca
                     </Text>
@@ -22,7 +22,7 @@ const SupportPages = () => {
                             <Image style={styles.image} source={require('./../../assets/money-back.png')} />
                         </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.box}>
+                <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('Support')}>
                     <Text style={styles.title} category="c1">
                         24/7 Podrška korisnicima
                     </Text>
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SupportPages
+export default SupportBoxes
