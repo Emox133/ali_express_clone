@@ -1,14 +1,13 @@
 import React from 'react'
-import { SafeAreaView } from 'react-native';
 import {StyleSheet} from 'react-native'
-import { Layout } from '@ui-kitten/components';
 import SearchProducts from '../../components/UI/SearchProducts';
+import {View} from 'react-native'
 
 const ProductsScreen = () => {
     return (
-        <Layout>
+        <View style={styles.screen}>
             <SearchProducts />
-        </Layout>
+        </View>
     )
 }
 
@@ -16,7 +15,8 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         justifyContent: 'flex-start',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#fff',
     }
 })
 
