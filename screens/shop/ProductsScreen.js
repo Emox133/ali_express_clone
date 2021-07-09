@@ -1,12 +1,13 @@
 import React from 'react'
-import {StyleSheet} from 'react-native'
+import {StyleSheet, View} from 'react-native'
 import SearchProducts from '../../components/UI/SearchProducts';
-import {View} from 'react-native'
+import SupportPages from '../../components/UI/SupportPages'
 
 const ProductsScreen = () => {
     return (
         <View style={styles.screen}>
             <SearchProducts />
+            <SupportPages />
         </View>
     )
 }
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: '#fafafa',
     }
 })
 

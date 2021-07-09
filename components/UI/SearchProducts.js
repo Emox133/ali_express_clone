@@ -33,7 +33,7 @@ export default SearchProducts = () => {
             flexDirection: 'row',
             alignItems: 'center',
             paddingVertical: 10,
-            backgroundColor: '#eee',
+            backgroundColor: '#fafafa',
             elevation: 5
         },
         search__input: {
@@ -50,10 +50,10 @@ export default SearchProducts = () => {
 
     return (
         <>
-            <View style={{ backgroundColor: '#eee', height: 190 }}>
+            <View style={{ backgroundColor: '#fafafa', height: 190 }}>
                 <View style={styles.search__container}>
                     <Input
-                        placeholder='Place your Text'
+                        placeholder='slušalice...'
                         accessoryRight={renderSearchIcon}
                         status="primary"
                         style={styles.search__input}
@@ -62,9 +62,6 @@ export default SearchProducts = () => {
                     <SearchWithCamera />
                 </View>
                 <FeatureCategories />
-            </View>
-            <View>
-
             </View>
         </>
     );
