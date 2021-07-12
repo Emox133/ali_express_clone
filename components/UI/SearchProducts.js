@@ -50,7 +50,7 @@ export default SearchProducts = () => {
 
     return (
         <>
-            <View style={{ backgroundColor: '#fafafa', height: 190 }}>
+            <View style={{ backgroundColor: '#fafafa', height: 90 }}>
                 <View style={styles.search__container}>
                     <Input
                         placeholder='slušalice...'
@@ -61,7 +61,7 @@ export default SearchProducts = () => {
                     />
                     <SearchWithCamera />
                 </View>
-                <FeatureCategories />
+                {/* <FeatureCategories /> */}
             </View>
         </>
     );

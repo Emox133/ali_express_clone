@@ -1,22 +1,60 @@
 import React from 'react'
-import {View, StyleSheet} from 'react-native'
-import { Icon, Button, Text } from '@ui-kitten/components'
+import {View, TouchableOpacity, StyleSheet} from 'react-native'
+import { Text } from '@ui-kitten/components'
 import {Ionicons} from '@expo/vector-icons'
 
-const FeatureCircle = ({feature}) => {
-    const renderIcon = () => (
-        <Icon name={feature.iconName} style={styles.icon} fill='#fff' />
-    )
-
+const FeatureCircle = ({onNavigate}) => {
     return (
-        <View style={styles.featureCircle}>
-            {/* ALTERNATIVE DELETE LATER */}
-            {/* <Button style={{...styles.iconBox, ...feature.style}} accessoryLeft={renderIcon}></Button> */}
-            <View style={{...styles.iconBox, ...feature.style}}>
-                <Ionicons name={feature.iconName} size={35} color="white" />
+        <>
+            <View style={styles.featureCircle}>
+                <TouchableOpacity onPress={() => onNavigate.navigate('Categories')} activeOpacity={0.5} style={{...styles.iconBox, ...{backgroundColor: '#e63946'}}}>
+                    <Ionicons name="list-outline" size={35} color="white" />
+                </TouchableOpacity>
+                <Text category="label" style={styles.featureTitle}>Kategorije</Text>
             </View>
-            <Text category="label" style={styles.featureTitle}>{feature.name}</Text>
-        </View>
+            <View style={styles.featureCircle}>
+                <TouchableOpacity activeOpacity={0.5} style={{...styles.iconBox, ...{backgroundColor: '#a8dadc'}}}>
+                    <Ionicons name="happy-outline" size={35} color="white" />
+                </TouchableOpacity>
+                <Text category="label" style={styles.featureTitle}>Nešto</Text>
+            </View>
+            <View style={styles.featureCircle}>
+                <TouchableOpacity activeOpacity={0.5} style={{...styles.iconBox, ...{backgroundColor: '#b5179e'}}}>
+                    <Ionicons name="gift-outline" size={35} color="white" />
+                </TouchableOpacity>
+                <Text category="label" style={styles.featureTitle}>Pokloni</Text>
+            </View>
+            <View style={styles.featureCircle}>
+                <TouchableOpacity activeOpacity={0.5} style={{...styles.iconBox, ...{backgroundColor: '#fdc500'}}}>
+                    <Ionicons name="cash-outline" size={35} color="white" />
+                </TouchableOpacity>
+                <Text category="label" style={styles.featureTitle}>Bonus</Text>
+            </View>
+            <View style={styles.featureCircle}>
+                <TouchableOpacity activeOpacity={0.5} style={{...styles.iconBox, ...{backgroundColor: '#14213d'}}}>
+                    <Ionicons name="bulb-outline" size={35} color="white" />
+                </TouchableOpacity>
+                <Text category="label" style={styles.featureTitle}>Novo</Text>
+            </View>
+            <View style={styles.featureCircle}>
+                <TouchableOpacity activeOpacity={0.5} style={{...styles.iconBox, ...{backgroundColor: '#2364aa'}}}>
+                    <Ionicons name="star-outline" size={35} color="white" />
+                </TouchableOpacity>
+                <Text category="label" style={styles.featureTitle}>Top Selekcija</Text>
+            </View>
+            <View style={styles.featureCircle}>
+                <TouchableOpacity activeOpacity={0.5} style={{...styles.iconBox, ...{backgroundColor: '#d3d3d3'}}}>
+                    <Ionicons name="shirt-outline" size={35} color="white" />
+                </TouchableOpacity>
+                <Text category="label" style={styles.featureTitle}>StyleZone</Text>
+            </View>
+            <View style={styles.featureCircle}>
+                <TouchableOpacity activeOpacity={0.5} style={{...styles.iconBox, ...{backgroundColor: '#76c893'}}}>
+                    <Ionicons name="car-outline" size={35} color="white" />
+                </TouchableOpacity>
+                <Text category="label" style={styles.featureTitle}>Besplatna Dostava</Text>
+            </View>
+        </>
     )
 }
 
