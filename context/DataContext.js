@@ -10,6 +10,7 @@ export const useData = () => {
 const DataContextProvider = ({children}) => {
     const [products, setProducts] = useState(PRODUCTS)
     const [cart, setCart] = useState([])
+    const [totalAmount, setTotalAmount] = useState(0)
 
     const addProductToCart = (id) => {
         // 1) Find the choosen product index
@@ -39,6 +40,7 @@ const DataContextProvider = ({children}) => {
 
         const selectedProduct = copyCart.find(p => p.id === id)
         selectedProduct.quantity = selectedProduct.quantity + 1
+        calculateTotalAmount()
 
         setCart(copyCart)
     }
@@ -49,8 +51,21 @@ const DataContextProvider = ({children}) => {
         const selectedProduct = copyCart.find(p => p.id === id)
         if(selectedProduct.quantity <= 1) return 
         selectedProduct.quantity = selectedProduct.quantity - 1
+        calculateTotalAmount()
 
         setCart(copyCart)
+    }
+
+    const calculateTotalAmount = () => {
+        if(cart.length === 0) return
+
+        const copyCart = [...cart]
+
+        const sum = copyCart.map(p => p.price * p.quantity).reduce((acc, cur) => {
+            return acc + cur
+        })
+
+        setTotalAmount(sum)
     }
 
     const value = {
@@ -59,7 +74,9 @@ const DataContextProvider = ({children}) => {
         setCart,
         addProductToCart,
         increaseProductQuantity,
-        decreaseProductQuantity
+        decreaseProductQuantity,
+        totalAmount,
+        calculateTotalAmount
     }
 
     return (

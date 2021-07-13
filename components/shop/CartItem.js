@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 import { Radio, Button, Text } from '@ui-kitten/components'
 import { useData } from '../../context/DataContext'

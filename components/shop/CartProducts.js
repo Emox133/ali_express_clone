@@ -9,7 +9,7 @@ const CartProducts = () => {
     return <FlatList
         data={cart}
         renderItem={item => <CartItem itemData={item} />}
-        // keyExtractor={(item, index) => item.key}
+        keyExtractor={(item) => item.id.toString()}
     />
 }
 

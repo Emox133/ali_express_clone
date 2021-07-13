@@ -1,12 +1,20 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Text } from '@ui-kitten/components'
 import CartProducts from '../../components/shop/CartProducts'
+import CartProductsFooter from '../../components/UI/CartProductsFooter'
+import { useData } from '../../context/DataContext'
 
 const CartScreen = () => {
+    const {calculateTotalAmount} = useData()
+
+    useEffect(() => {
+        calculateTotalAmount()
+    }, [])
+
     return (
         <View style={styles.screen}>
            <CartProducts />
+           <CartProductsFooter/>
         </View>
     )
 }
