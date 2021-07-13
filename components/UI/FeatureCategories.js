@@ -12,7 +12,7 @@ const FeatureCategories = ({navigation}) => {
 
 const styles = StyleSheet.create({
     features: {
-        height: 150,
+        height: 130,
         flexDirection: 'row',
         justifyContent: 'space-between',
     }

@@ -1,30 +1,27 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Input, Icon, Button } from '@ui-kitten/components';
-import FeatureCategories from './FeatureCategories';
+import { StyleSheet, View, TouchableNativeFeedback } from 'react-native';
+import { Input, Icon, Button, Text } from '@ui-kitten/components';
 import { Ionicons } from '@expo/vector-icons';
+import { useData } from '../../context/DataContext';
 
-export default SearchProducts = () => {
+export default SearchProducts = ({navigation}) => {
+    const { cart } = useData()
+
     const searchIcon = () => (
         <Icon name="search-outline" animation={null} style={{ height: 25, width: 25 }} fill="#fff" />
-    )
-
-    const cameraIcon = () => (
-        <Icon name="camera-outline" animation={null} style={{ height: 35, width: 35 }} fill="#555" />
     )
 
     const renderSearchIcon = () => (
         <Button status="danger" size="tiny" style={styles.button} accessoryLeft={searchIcon}></Button>
     )
 
-    // const SearchWithCamera = () => (
-    //     <Button size="tiny" appearance="ghost" accessoryLeft={cameraIcon}></Button>
-    // )
-
-    const SearchWithCamera = () => (
-        <View>
-            <Ionicons name="camera-outline" size={35} color="#555" style={{margin: 10}} />
-        </View>
+    const CartComponent = () => (
+        <TouchableNativeFeedback style={styles.cartBox} onPress={() => navigation.navigate('Cart')}>
+            <View>
+                <Ionicons style={styles.cartIcon} name="cart" size={35} color="#555" style={{ margin: 10 }} />
+                <Text style={styles.cartNumOfItems}>{cart.length}</Text>
+            </View>
+        </TouchableNativeFeedback>
     )
 
     const styles = StyleSheet.create({
@@ -45,6 +42,21 @@ export default SearchProducts = () => {
             borderRadius: 20,
             height: 35,
             width: 55
+        },
+        cartBox: {
+            position: 'relative'
+        },
+        cartNumOfItems: {
+            height: 22,
+            width: 22,
+            fontSize: 13,
+            position: 'absolute',
+            top: 0,
+            right: 5,
+            color: '#fff',
+            backgroundColor: '#e52613',
+            borderRadius: 44,
+            textAlign: 'center'
         }
     })
 
@@ -59,9 +71,8 @@ export default SearchProducts = () => {
                         style={styles.search__input}
                         status="danger"
                     />
-                    <SearchWithCamera />
+                    <CartComponent />
                 </View>
-                {/* <FeatureCategories /> */}
             </View>
         </>
     );

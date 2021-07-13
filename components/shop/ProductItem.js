@@ -1,6 +1,7 @@
 import { Text } from '@ui-kitten/components'
 import React from 'react'
 import { View, StyleSheet, Image, TouchableNativeFeedback } from 'react-native'
+import { ProductItemMenu } from '../UI/ProductItemMenu'
 
 const ProductItem = ({ itemData }) => {
     return (
@@ -17,12 +18,10 @@ const ProductItem = ({ itemData }) => {
                         US {itemData.item.price}
                     </Text>
                     <View style={styles.detailsBox}>
-                        <Text>
-                            37 sold
+                        <Text style={{marginTop: 0}}>
+                            37 prodanih
                         </Text>
-                        <Text>
-                            ...
-                        </Text>
+                        <ProductItemMenu productId={itemData.item.id} inCart={itemData.item.inCart}/>
                     </View>
                 </View>
             </View>
@@ -32,30 +31,29 @@ const ProductItem = ({ itemData }) => {
 
 const styles = StyleSheet.create({
     product: {
-        height: 350,
-        width: 350,
+        height: 250,
+        width: 180,
+        margin: 10,
         backgroundColor: '#fff',
         elevation: 2,
-        marginVertical: 10
+        borderTopRightRadius: 8,
+        borderTopLeftRadius: 8,
+        overflow: 'hidden'
     },
     imageBox: {
         height: '65%',
         width: '100%',
-        // borderRadius: 8,
-        overflow: 'hidden',
-        borderTopRightRadius: 8,
-        borderTopLeftRadius: 8
     },
     img: {
         height: '100%',
-        width: '100%',
+        width: '100%'
     },
     textBox: {
         padding: 10
     },
     detailsBox: {
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     }
 })
 

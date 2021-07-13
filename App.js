@@ -6,12 +6,15 @@ import ShopNavigator from './navigation/ShopNavigator';
 import { default as theme } from './theme.json'
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import GlobalStyles from './constants/GlobalStyles';
+import CartContextProvider from './context/DataContext';
 
 export default () => (
-  <SafeAreaView style={GlobalStyles.AndroidSafeArea}>
-    <IconRegistry icons={EvaIconsPack} />
-    <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
-      <ShopNavigator />
-    </ApplicationProvider>
-  </SafeAreaView>
+  <CartContextProvider>
+    <SafeAreaView style={GlobalStyles.AndroidSafeArea}>
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme }}>
+        <ShopNavigator />
+      </ApplicationProvider>
+    </SafeAreaView>
+  </CartContextProvider>
 );

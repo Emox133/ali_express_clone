@@ -8,7 +8,7 @@ import FeatureCategories from '../../components/UI/FeatureCategories'
 const ProductsScreen = (props) => {
     return (
         <View style={styles.screen}>
-            <SearchProducts />
+            <SearchProducts navigation={props.navigation}/>
             <FeatureCategories navigation={props.navigation} />
             <SupportBoxes navigation={props.navigation} />
             <Products />
