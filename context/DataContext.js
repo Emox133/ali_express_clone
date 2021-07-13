@@ -27,17 +27,39 @@ const DataContextProvider = ({children}) => {
         // 5) Merge new product with old cart items
         setCart(prevState => [
             ...prevState,
-            selectedProduct
+            {...selectedProduct, selected: false}
         ])
 
         // ? Do something with it // if not delete later
         // const isProductInCart = cart.includes(selectedProduct)
     }
 
+    const increaseProductQuantity = (id) => {
+        const copyCart = [...cart]
+
+        const selectedProduct = copyCart.find(p => p.id === id)
+        selectedProduct.quantity = selectedProduct.quantity + 1
+
+        setCart(copyCart)
+    }
+
+    const decreaseProductQuantity = (id) => {
+        const copyCart = [...cart]
+
+        const selectedProduct = copyCart.find(p => p.id === id)
+        if(selectedProduct.quantity <= 1) return 
+        selectedProduct.quantity = selectedProduct.quantity - 1
+
+        setCart(copyCart)
+    }
+
     const value = {
         products,
         cart,
-        addProductToCart
+        setCart,
+        addProductToCart,
+        increaseProductQuantity,
+        decreaseProductQuantity
     }
 
     return (

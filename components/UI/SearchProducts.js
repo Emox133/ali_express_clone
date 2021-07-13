@@ -16,7 +16,7 @@ export default SearchProducts = ({navigation}) => {
     )
 
     const CartComponent = () => (
-        <TouchableNativeFeedback style={styles.cartBox} onPress={() => navigation.navigate('Cart')}>
+        <TouchableNativeFeedback style={styles.cartBox} onPress={() => navigation.navigate('Cart', {cartQuantity: cart.length})}>
             <View>
                 <Ionicons style={styles.cartIcon} name="cart" size={35} color="#555" style={{ margin: 10 }} />
                 <Text style={styles.cartNumOfItems}>{cart.length}</Text>

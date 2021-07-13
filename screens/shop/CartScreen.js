@@ -1,10 +1,12 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+import { Text } from '@ui-kitten/components'
+import CartProducts from '../../components/shop/CartProducts'
 
 const CartScreen = () => {
     return (
         <View style={styles.screen}>
-            <Text>CartScreen</Text>
+           <CartProducts />
         </View>
     )
 }
@@ -16,5 +18,13 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     }
 })
+
+CartScreen.navigationOptions = (navData) => {
+    const cartItemsQuantity = navData.navigation.getParam('cartQuantity')
+
+    return {
+        title: `Korpa (${cartItemsQuantity})`
+    }
+}
 
 export default CartScreen
