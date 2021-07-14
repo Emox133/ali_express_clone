@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useCallback} from 'react'
 import { PRODUCTS } from '../data/dummyData'
 
 const DataContext = React.createContext()
@@ -24,11 +24,14 @@ const DataContextProvider = ({children}) => {
 
         // 4) Change its "inCart" propery for button disabling
         selectedProduct.inCart = true
+        selectedProduct.selected = false
 
         // 5) Merge new product with old cart items
         setCart(prevState => [
             ...prevState,
-            {...selectedProduct, selected: false}
+            selectedProduct
+            // BELLOW IS AN ALTERNATIVE THAT DOES NOT WORK
+            // {...selectedProduct, selected: false}
         ])
 
         // ? Do something with it // if not delete later
@@ -56,16 +59,43 @@ const DataContextProvider = ({children}) => {
         setCart(copyCart)
     }
 
-    const calculateTotalAmount = () => {
-        if(cart.length === 0) return
+    const calculateTotalAmount = useCallback(() => {
+        if(cart.length === 0) {
+            setTotalAmount(0)
+            return
+        }
 
         const copyCart = [...cart]
-
         const sum = copyCart.map(p => p.price * p.quantity).reduce((acc, cur) => {
             return acc + cur
         })
 
         setTotalAmount(sum)
+    }, [cart, totalAmount])
+
+    const deleteSelectedFromCart = () => {
+        const copyCart = [...cart]
+        const updatedCart = copyCart.filter(p => p.selected !== true)
+
+        // 1) Find indexes of products that are just deleted
+        const deletedProductIndexes = products.map((p, i) => {
+            if(p.inCart === true) {
+                return i
+            }
+        }).filter(el => el !== undefined)
+        
+        deletedProductIndexes.map(dpi => {
+            const copyProducts = [...products]
+
+            if(copyProducts[dpi].selected) {
+                copyProducts[dpi].inCart = false
+                setProducts(copyProducts)
+            }
+            
+        })
+
+        setCart(updatedCart)
+        calculateTotalAmount()
     }
 
     const value = {
@@ -76,7 +106,8 @@ const DataContextProvider = ({children}) => {
         increaseProductQuantity,
         decreaseProductQuantity,
         totalAmount,
-        calculateTotalAmount
+        calculateTotalAmount,
+        deleteSelectedFromCart
     }
 
     return (

@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, StyleSheet, FlatList } from 'react-native'
-import { Text } from '@ui-kitten/components'
+import { FlatList } from 'react-native'
+// import { Text } from '@ui-kitten/components'
 import { useData } from '../../context/DataContext'
 import ProductItem from './ProductItem'
 

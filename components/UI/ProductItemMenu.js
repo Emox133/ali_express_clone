@@ -15,7 +15,7 @@ const InfoIcon = () => (
 export const ProductItemMenu = ({productId, inCart}) => {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [visible, setVisible] = useState(false);
-  const {addProductToCart} = useData()
+  const {addProductToCart, cart} = useData()
 
   const onItemSelect = (index) => {
     setSelectedIndex(index);
