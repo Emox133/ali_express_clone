@@ -4,12 +4,12 @@ import { FlatList } from 'react-native'
 import { useData } from '../../context/DataContext'
 import ProductItem from './ProductItem'
 
-const Products = () => {
+const Products = ({navigation}) => {
     const {products} = useData()
 
     return <FlatList 
         data={products}
-        renderItem={item => <ProductItem itemData={item}/>}
+        renderItem={item => <ProductItem onNavigate={navigation} itemData={item}/>}
         keyExtractor={item => item.id.toString()}
         numColumns={2} //Improve Grid Later
     />

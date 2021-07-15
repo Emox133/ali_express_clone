@@ -4,10 +4,15 @@ import ProductsScreen from '../screens/shop/ProductsScreen'
 import SupportScreenDetails from '../screens/ui/SupportScreenDetails'
 import CategoriesScreen from '../screens/shop/CategoriesScreen'
 import CartScreen from '../screens/shop/CartScreen'
+import ProductDetailsScreen from '../screens/shop/ProductDetailsScreen'
 
 const ShopNavigator = createStackNavigator({
     Products: {
         screen: ProductsScreen,
+        navigationOptions: {headerShown: false}
+    },
+    ProductDetails: {
+        screen: ProductDetailsScreen,
         navigationOptions: {headerShown: false}
     },
     Support: {

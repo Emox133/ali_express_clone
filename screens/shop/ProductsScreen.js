@@ -11,7 +11,7 @@ const ProductsScreen = (props) => {
             <SearchProducts navigation={props.navigation}/>
             <FeatureCategories navigation={props.navigation} />
             <SupportBoxes navigation={props.navigation} />
-            <Products />
+            <Products navigation={props.navigation}/>
         </View>
     )
 }

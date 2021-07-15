@@ -3,9 +3,9 @@ import React from 'react'
 import { View, StyleSheet, Image, TouchableNativeFeedback } from 'react-native'
 import { ProductItemMenu } from '../UI/ProductItemMenu'
 
-const ProductItem = ({ itemData }) => {
+const ProductItem = ({ itemData, onNavigate }) => {
     return (
-        <TouchableNativeFeedback useForeground>
+        <TouchableNativeFeedback useForeground onPress={() => onNavigate.navigate('ProductDetails')}>
             <View style={styles.product}>
                 <View style={styles.imageBox}>
                     <Image style={styles.img} source={{uri: itemData.item.image}} />
@@ -21,7 +21,7 @@ const ProductItem = ({ itemData }) => {
                         <Text style={{marginTop: 0}}>
                             37 prodanih
                         </Text>
-                        <ProductItemMenu productId={itemData.item.id} inCart={itemData.item.inCart}/>
+                        <ProductItemMenu onNavigate={onNavigate} productId={itemData.item.id} inCart={itemData.item.inCart}/>
                     </View>
                 </View>
             </View>

@@ -77,7 +77,7 @@ const DataContextProvider = ({children}) => {
         const copyCart = [...cart]
         const updatedCart = copyCart.filter(p => p.selected !== true)
 
-        // 1) Find indexes of products that are just deleted
+        // 1) Find indexes of products that are just deleted and restore their inCart state
         const deletedProductIndexes = products.map((p, i) => {
             if(p.inCart === true) {
                 return i
