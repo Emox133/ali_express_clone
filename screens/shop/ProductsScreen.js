@@ -10,7 +10,7 @@ import { PRODUCTS } from '../../data/dummyData';
 const ProductsScreen = (props) => {
     return (
         <View style={styles.screen}>
-            <CustomStatusBar barStyle="dark-content" />
+            <CustomStatusBar barStyle="light-content" />
             <SearchProducts navigation={props.navigation} />
             <FeatureCategories navigation={props.navigation} />
             <SupportBoxes navigation={props.navigation} />

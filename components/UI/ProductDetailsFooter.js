@@ -28,7 +28,7 @@ const ProductDetailsFooter = ({product}) => {
                         <Button disabled={inCart} appearance="filled" status="primary" size="small" style={styles.classicBtnSoft} onPress={() => addProductToCart(id)}>{inCart ? 'U KORPI' : 'DODAJ U KORPU'}</Button>
                     </View>
                     <View style={styles.classicBtnWrapper}>
-                        <Button appearance="filled" status="danger" size="small" style={styles.classicBtnStrong}>BUY NOW</Button>
+                        <Button appearance="filled" status="info" size="small" style={styles.classicBtnStrong}>KUPI ODMAH</Button>
                     </View>
                 </View>
             </View>

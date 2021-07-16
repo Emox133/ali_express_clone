@@ -1,20 +1,23 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Text } from '@ui-kitten/components'
+import {BIJELA_TEHNIKA_CATEGORIES} from '../../../data/dummyData'
+import Categories from '../../../components/UI/Categories'
 
-const BijelaTehnika = () => {
+const BijelaTehnika = (props) => {
     return (
         <View style={styles.screen}>
-            <Text>BijelaTehnika</Text>
+            <Categories title="Bijela tehnika" onNavigate={props.navigation} data={BIJELA_TEHNIKA_CATEGORIES} />
         </View>
     )
 }
 
+BijelaTehnika.navigationOptions = {
+    headerTitle: ''
+}
+
 const styles = StyleSheet.create({
     screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        flex: 1
     }
 })
 

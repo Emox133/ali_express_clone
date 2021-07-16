@@ -1,20 +1,23 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Text } from '@ui-kitten/components'
+import {VRTNI_PROGRAM_CATEGORIES} from '../../../data/dummyData'
+import Categories from '../../../components/UI/Categories'
 
-const VrtniProgram = () => {
+const VrtniProgram = (props) => {
     return (
         <View style={styles.screen}>
-            <Text>VrtniProgram</Text>
+            <Categories title="Vrtni program" onNavigate={props.navigation} data={VRTNI_PROGRAM_CATEGORIES} />
         </View>
     )
 }
 
+VrtniProgram.navigationOptions = {
+    headerTitle: ''
+}
+
 const styles = StyleSheet.create({
     screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        flex: 1
     }
 })
 

@@ -1,20 +1,23 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Text } from '@ui-kitten/components'
+import {VODOINSTALACIJA_OPREMA_CATEGORIES} from '../../../data/dummyData'
+import Categories from '../../../components/UI/Categories'
 
-const Vodoinstalacije = () => {
+const Vodoinstalacije = (props) => {
     return (
         <View style={styles.screen}>
-            <Text>Vodoinstalacije</Text>
+            <Categories title="Vodoinstalacije i oprema" onNavigate={props.navigation} data={VODOINSTALACIJA_OPREMA_CATEGORIES} />
         </View>
     )
 }
 
+Vodoinstalacije.navigationOptions = {
+    headerTitle: ''
+}
+
 const styles = StyleSheet.create({
     screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        flex: 1
     }
 })
 

@@ -15,7 +15,7 @@ const CartProductsFooter = () => {
 
                 <View style={styles.checkoutBox}>
                     <Text style={styles.currentAmmountPrice}>US ${totalAmount}</Text>
-                    <Button style={styles.checkoutBtn} appearance="filled">Idi na kasu!</Button>
+                    <Button style={styles.checkoutBtn} status="danger" appearance="outline">Idi na kasu!</Button>
                 </View>
             </View>
         </View>

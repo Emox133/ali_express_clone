@@ -1,5 +1,8 @@
+import React from 'react'
 import {createAppContainer} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
+import { Ionicons } from '@expo/vector-icons'
 
 import ProductsScreen from '../screens/shop/ProductsScreen'
 import SupportScreenDetails from '../screens/ui/SupportScreenDetails'
@@ -17,6 +20,7 @@ import Vodoinstalacije from '../screens/categories/Root/Vodoinstalacije'
 import VrtniProgram from '../screens/categories/Root/VrtniProgram'
 import MainCategoryScreen from '../screens/shop/MainCategoryScreen'
 import SubCategoryScreen from '../screens/shop/SubCategoryScreen'
+import WishListScreen from '../screens/shop/WishListScreen'
 
 const ShopNavigator = createStackNavigator({
     Products: {
@@ -69,4 +73,37 @@ const ShopNavigator = createStackNavigator({
     },
 })
 
-export default createAppContainer(ShopNavigator)
+const ShopTabNavigator = createMaterialBottomTabNavigator({
+    Home: {
+        screen: ShopNavigator,
+        navigationOptions: {
+            tabBarIcon: (tabBarInfo) => (
+                <Ionicons 
+                    name="home-outline"
+                    color={tabBarInfo.tintColor}
+                    size={23}
+                />
+            )
+        }
+    },
+    WishList: {
+        screen: WishListScreen,
+        navigationOptions: {
+            tabBarIcon: (tabBarInfo) => (
+                <Ionicons 
+                    name="heart-outline"
+                    color={tabBarInfo.tintColor}
+                    size={23}
+                />
+            ),
+            title: 'Lista Želja'
+        }
+    }
+}, {
+    // shifting: true,
+    barStyle: {
+        backgroundColor: '#e52613'
+    }
+})
+
+export default createAppContainer(ShopTabNavigator)
