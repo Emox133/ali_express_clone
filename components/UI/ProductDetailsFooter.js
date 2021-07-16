@@ -2,16 +2,13 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { Text, Button } from '@ui-kitten/components'
+import { useData } from '../../context/DataContext'
 
-const StoreIconCmp = () => (
-    <MaterialCommunityIcons name="store-outline" size={25} color="#222" />
-)
+// BEWARE THIS COMPONENT IS NOT FINISHED YET
+const ProductDetailsFooter = ({product}) => {
+    const {addProductToCart} = useData()
+    const {id, inCart} = product.item
 
-const ChatIconCmp = () => (
-    <Ionicons name="chatbubble-ellipses-outline" size={25} color="#222" />
-)
-
-const ProductDetailsFooter = () => {
     return (
         <View style={styles.mainContainer}>
             <View style={styles.flexContainer}>
@@ -28,10 +25,10 @@ const ProductDetailsFooter = () => {
 
                 <View style={styles.classicButtonsContainer}>
                     <View style={styles.classicBtnWrapper}>
-                        <Button appearance="filled" status="primary" style={styles.classicBtnSoft}>ADD TO CART</Button>
+                        <Button disabled={inCart} appearance="filled" status="primary" size="small" style={styles.classicBtnSoft} onPress={() => addProductToCart(id)}>{inCart ? 'U KORPI' : 'DODAJ U KORPU'}</Button>
                     </View>
                     <View style={styles.classicBtnWrapper}>
-                        <Button appearance="filled" status="danger" style={styles.classicBtnStrong}>BUY NOW</Button>
+                        <Button appearance="filled" status="danger" size="small" style={styles.classicBtnStrong}>BUY NOW</Button>
                     </View>
                 </View>
             </View>
@@ -71,10 +68,12 @@ const styles = StyleSheet.create({
         width: '50%',
     },
     classicBtnSoft: {
-       borderRadius: 0
+       borderRadius: 0,
+       height: '100%'
     },
     classicBtnStrong: {
-        borderRadius: 0
+        borderRadius: 0,
+        height: '100%'
     }
 })
 

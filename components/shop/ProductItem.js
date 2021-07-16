@@ -5,13 +5,13 @@ import { ProductItemMenu } from '../UI/ProductItemMenu'
 
 const ProductItem = ({ itemData, onNavigate }) => {
     return (
-        <TouchableNativeFeedback useForeground onPress={() => onNavigate.navigate('ProductDetails')}>
-            <View style={styles.product}>
+        <TouchableNativeFeedback useForeground onPress={() => onNavigate.navigate('ProductDetails', {productInfo: itemData})}>
+            <View style={styles.product} >
                 <View style={styles.imageBox}>
                     <Image style={styles.img} source={{uri: itemData.item.image}} />
                 </View>
                 <View style={styles.textBox}>
-                    <Text>
+                    <Text numberOfLines={1}>
                         {itemData.item.name}
                     </Text>
                     <Text style={{fontWeight: 'bold'}}>
@@ -21,7 +21,7 @@ const ProductItem = ({ itemData, onNavigate }) => {
                         <Text style={{marginTop: 0}}>
                             37 prodanih
                         </Text>
-                        <ProductItemMenu onNavigate={onNavigate} productId={itemData.item.id} inCart={itemData.item.inCart}/>
+                        <ProductItemMenu onNavigate={onNavigate} itemData={itemData}/>
                     </View>
                 </View>
             </View>
@@ -41,15 +41,14 @@ const styles = StyleSheet.create({
         overflow: 'hidden'
     },
     imageBox: {
-        height: '65%',
-        width: '100%',
+        height: 165
     },
     img: {
         height: '100%',
         width: '100%'
     },
     textBox: {
-        padding: 10
+        padding: 10,
     },
     detailsBox: {
         flexDirection: 'row',

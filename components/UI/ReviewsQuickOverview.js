@@ -62,7 +62,7 @@ const ReviewsQuickOverview = () => {
 
 const styles = StyleSheet.create({
     mainContainer: {
-        height: 400,
+        minHeight: 180,
         padding: 10,
         backgroundColor: '#fff',
         marginVertical: 20

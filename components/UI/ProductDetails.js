@@ -4,16 +4,18 @@ import { Text, Divider } from '@ui-kitten/components'
 import { Ionicons } from '@expo/vector-icons'
 import ReviewsQuickOverview from './ReviewsQuickOverview'
 
-const ProductDetails = () => {
+const ProductDetails = ({product}) => {
+    const {mainCategory, subCategory, description, id, image, inCart, name, price, discount, varyPrice, quantity} = product.item
+
     return (
         <ScrollView style={styles.mainContainer}>
             <View style={styles.imageBox}>
-                <Image style={styles.image} source={{uri: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=998&q=80'}} />
+                <Image resizeMode="cover" style={styles.image} source={{uri: image}} />
             </View>
 
             <View style={styles.titleTextBox}>
-                <Text style={styles.titleMainText}>US $13.02 - 18.39</Text>
-                <Text style={styles.textDiscount}>US $14.15 - 19-99</Text>
+                <Text style={styles.titleMainText}>US ${price} - ${varyPrice}</Text>
+                <Text style={styles.textDiscount}>{discount ? `$${price} $${discount}` : null}</Text>
                 <View style={styles.heartIconContainer}>
                     <View>
                         <Ionicons name="heart-outline" size={24} color="#444" />
@@ -24,10 +26,7 @@ const ProductDetails = () => {
 
             <View style={styles.detailsTextBox}>
                 <Text category="c1" style={styles.detailsText}>
-                    Lorem ipsum dolor sir amet
-                    Lorem ipsum dolor sir amet
-                    Lorem ipsum dolor sir amet
-                    Lorem ipsum dolor sir amet
+                    {description}
                 </Text>
             </View>
 
@@ -36,19 +35,19 @@ const ProductDetails = () => {
             <Text style={{marginLeft: 15, marginBottom: 5, color: '#000'}}>Više artikala</Text>
             <View style={styles.brandColorsBox}>
                 <View style={styles.imageBrandBox}>
-                    <Image source={{uri: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=998&q=80'}} style={styles.imageBrand} />
+                    <Image source={{uri: image}} style={styles.imageBrand} />
                 </View>
 
                 <View style={styles.imageBrandBox}>
-                    <Image source={{uri: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=998&q=80'}} style={styles.imageBrand} />
+                    <Image source={{uri: image}} style={styles.imageBrand} />
                 </View>
 
                 <View style={styles.imageBrandBox}>
-                    <Image source={{uri: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=998&q=80'}} style={styles.imageBrand} />
+                    <Image source={{uri: image}} style={styles.imageBrand} />
                 </View>
 
                 <View style={styles.imageBrandBox}>
-                    <Image source={{uri: 'https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=998&q=80'}} style={styles.imageBrand} />
+                    <Image source={{uri: image}} style={styles.imageBrand} />
                 </View>
             </View>
 

@@ -12,9 +12,10 @@ const InfoIcon = () => (
     <Ionicons name="information-circle" size={18} color="#FF6721" />
 )
 
-export const ProductItemMenu = ({productId, inCart, onNavigate}) => {
+export const ProductItemMenu = ({itemData, onNavigate}) => {
   const [visible, setVisible] = useState(false);
   const {addProductToCart} = useData()
+  const {id: productId, inCart} = itemData.item
 
   const renderToggleButton = () => (
     <TouchableWithoutFeedback onPress={() => setVisible(true)}>
@@ -23,7 +24,7 @@ export const ProductItemMenu = ({productId, inCart, onNavigate}) => {
   );
 
   const goToDetailsPage = () => {
-      onNavigate.navigate('ProductDetails')
+      onNavigate.navigate('ProductDetails', {productInfo: itemData})
       setVisible(false)
   }
 

@@ -4,10 +4,10 @@ import { Text } from '@ui-kitten/components'
 
 const CategoryItem = ({ itemData }) => {
     return (
-        <TouchableNativeFeedback useForeground>
+        <TouchableNativeFeedback useForeground style={{minHeight: 100}}>
             <View style={styles.categoryBox}>
                 <View style={styles.imageBox}>
-                    <Image style={styles.img} source={{ uri: itemData.item.image }} />
+                    <Image resizeMode="stretch" style={styles.img} source={{ uri: itemData.item.image }} />
                 </View>
                 <View style={styles.categoryItemTitleBox}>
                     <Text style={styles.categoryItemTitle}>
@@ -21,25 +21,25 @@ const CategoryItem = ({ itemData }) => {
 
 const styles = StyleSheet.create({
     categoryBox: {
-        height: 150,
+        minHeight: 100,
         width: 130,
         margin: 10,
         backgroundColor: '#fff',
         elevation: 2,
     },
     imageBox: {
-        height: '88%',
-        width: '100%',
+        height: 100,
     },
     img: {
         height: '100%',
         width: '100%'
     },
     categoryItemTitleBox: {
-        // fix later
+        // fixed
+        marginBottom: 5
     },
     categoryItemTitle: {
-        fontSize: 10,
+        fontSize: 11,
         textAlign: 'center',
         fontWeight: 'bold'
     }

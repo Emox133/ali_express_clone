@@ -1,15 +1,19 @@
 import React from 'react'
-import { View, StyleSheet} from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import SearchProductsBlack from '../../components/UI/SearchProductsBlack'
 import ProductDetails from '../../components/UI/ProductDetails'
 import ProductDetailsFooter from '../../components/UI/ProductDetailsFooter'
+import CustomStatusBar from './../../components/utils/CustomStatusBar'
 
-const ProductDetailsScreen = () => {
+const ProductDetailsScreen = (props) => {
+    const productInfo = props.navigation.getParam('productInfo')
+
     return (
         <View style={styles.screen}>
-            <SearchProductsBlack />
-            <ProductDetails/>
-            <ProductDetailsFooter/>
+            <CustomStatusBar />
+            <SearchProductsBlack navigate={props.navigation} />
+            <ProductDetails product={productInfo} />
+            <ProductDetailsFooter product={productInfo} />
         </View>
     )
 }

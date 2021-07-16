@@ -70,6 +70,7 @@ export default SearchProducts = ({navigation}) => {
                         status="primary"
                         style={styles.search__input}
                         status="danger"
+                        size="small"
                     />
                     <CartComponent />
                 </View>
