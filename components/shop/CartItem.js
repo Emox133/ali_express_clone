@@ -4,7 +4,7 @@ import { Radio, Button, Text } from '@ui-kitten/components'
 import { useData } from '../../context/DataContext'
 
 const CartItem = ({ itemData }) => {
-    const { quantity, image, name, price, id: pId, selected } = itemData.item
+    const { quantity, image, name, price, id: pId, selected, freeShipping } = itemData.item
     const { cart, setCart, increaseProductQuantity, decreaseProductQuantity } = useData()
 
     const onSelectedHandler = (id) => {
@@ -15,9 +15,6 @@ const CartItem = ({ itemData }) => {
 
         setCart(copyCart)
     }
-
-    // DO LATER :)
-    // const batchProductsForDeletion = cart.filter(p => p.selected === true)
 
     return (
         <TouchableWithoutFeedback onPress={() => onSelectedHandler(pId)}> 
@@ -42,7 +39,7 @@ const CartItem = ({ itemData }) => {
                     <View style={styles.pricingOptionsBox}>
                         <View style={styles.priceShippingBox}>
                             <Text style={styles.price}>US {price}</Text>
-                            <Text category="c1" status="info">Free Shipping</Text>
+                            <Text category="c1" status="info">{freeShipping && 'Besplatna dostava'}</Text>
                         </View>
                         <View style={styles.quantityBox}>
                             <Button appearance="outline" size="tiny" status="basic" style={styles.quantityBtn} onPress={() => decreaseProductQuantity(pId)} disabled={quantity <= 1}>-</Button>

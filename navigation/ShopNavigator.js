@@ -2,7 +2,7 @@ import React from 'react'
 import {createAppContainer} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
-import { Ionicons } from '@expo/vector-icons'
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 
 import ProductsScreen from '../screens/shop/ProductsScreen'
 import SupportScreenDetails from '../screens/ui/SupportScreenDetails'
@@ -21,6 +21,31 @@ import VrtniProgram from '../screens/categories/Root/VrtniProgram'
 import MainCategoryScreen from '../screens/shop/MainCategoryScreen'
 import SubCategoryScreen from '../screens/shop/SubCategoryScreen'
 import WishListScreen from '../screens/shop/WishListScreen'
+import CheckoutScreen from '../screens/shop/CheckoutScreen'
+import AuthenticateScreen from '../screens/user/AuthenticateScreen'
+import RegisterOrSignupScreen from '../screens/user/RegisterOrSignupScreen'
+import AuthenticateRootScreen from '../screens/user/AuthenticateRootScreen'
+
+const CartStackNavigator = createStackNavigator({
+    Cart: CartScreen,
+    Checkout: {
+        screen: CheckoutScreen
+    },
+})
+
+const AuthenticationNavigator = createStackNavigator({
+    Authenticate: {
+        screen: AuthenticateScreen,
+        navigationOptions: {headerShown: false}
+    },
+    LoginSignup: {
+        screen: RegisterOrSignupScreen,
+        navigationOptions: {headerShown: false}
+    },
+    AuthenticateRoot: {
+        screen: AuthenticateRootScreen
+    }
+})
 
 const ShopNavigator = createStackNavigator({
     Products: {
@@ -36,9 +61,6 @@ const ShopNavigator = createStackNavigator({
     },
     Categories: {
         screen: CategoriesScreen
-    },
-    Cart: {
-        screen: CartScreen
     },
     MainCategory: {
         screen: MainCategoryScreen,
@@ -83,6 +105,18 @@ const ShopTabNavigator = createMaterialBottomTabNavigator({
                     color={tabBarInfo.tintColor}
                     size={23}
                 />
+            ),
+        }
+    },
+    Korpa: {
+        screen: CartStackNavigator,
+        navigationOptions: {
+            tabBarIcon: (tabBarInfo) => (
+                <Ionicons 
+                    name="cart-outline"
+                    color={tabBarInfo.tintColor}
+                    size={23}
+                />
             )
         }
     },
@@ -98,9 +132,21 @@ const ShopTabNavigator = createMaterialBottomTabNavigator({
             ),
             title: 'Lista Želja'
         }
+    },
+    Račun: {
+        screen: AuthenticationNavigator,
+        navigationOptions: {
+            tabBarIcon: (tabBarInfo) => (
+                <MaterialCommunityIcons 
+                    name="account-circle-outline"
+                    color={tabBarInfo.tintColor}
+                    size={23}
+                />
+            )
+        }
     }
 }, {
-    // shifting: true,
+    shifting: false,
     barStyle: {
         backgroundColor: '#e52613'
     }

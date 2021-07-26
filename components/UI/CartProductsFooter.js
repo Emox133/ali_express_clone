@@ -2,10 +2,11 @@ import React from 'react'
 import {View, StyleSheet, Dimensions} from 'react-native'
 import { Text, Button } from '@ui-kitten/components'
 import { useData } from '../../context/DataContext'
+import { withNavigation } from 'react-navigation'
 
-const CartProductsFooter = () => {
-    const {totalAmount} = useData()
-
+const CartProductsFooter = (props) => {
+    const {cart, totalAmount} = useData()
+    
     return (
         <View style={styles.mainContainer}>
             <View style={styles.flexContainer}>
@@ -14,8 +15,8 @@ const CartProductsFooter = () => {
                 </View>
 
                 <View style={styles.checkoutBox}>
-                    <Text style={styles.currentAmmountPrice}>US ${totalAmount}</Text>
-                    <Button style={styles.checkoutBtn} status="danger" appearance="outline">Idi na kasu!</Button>
+                    <Text style={styles.currentAmmountPrice}>US ${Number(totalAmount).toFixed(0)}</Text>
+                    <Button disabled={cart.length === 0} style={styles.checkoutBtn} status="danger" appearance="outline" onPress={() => props.navigation.navigate('Checkout')}>Idi na kasu!</Button>
                 </View>
             </View>
         </View>
@@ -53,4 +54,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default CartProductsFooter
+export default withNavigation(CartProductsFooter)
