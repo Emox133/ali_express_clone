@@ -11,6 +11,7 @@ const DataContextProvider = ({children}) => {
     const [products, setProducts] = useState(PRODUCTS)
     const [cart, setCart] = useState([])
     const [totalAmount, setTotalAmount] = useState(0)
+    const [loading, setLoading] = useState(false)
 
     const addProductToCart = (id) => {
         // 1) Find the choosen product index
@@ -107,7 +108,9 @@ const DataContextProvider = ({children}) => {
         decreaseProductQuantity,
         totalAmount,
         calculateTotalAmount,
-        deleteSelectedFromCart
+        deleteSelectedFromCart,
+        loading,
+        setLoading
     }
 
     return (

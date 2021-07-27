@@ -5,6 +5,9 @@ import ShopNavigator from './navigation/ShopNavigator';
 import { default as theme } from './theme.json'
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import CartContextProvider from './context/DataContext';
+import axios from 'axios'
+
+axios.defaults.baseURL = 'http://192.168.100.14:8000/api/v1'
 
 export default () => (
   <CartContextProvider>
