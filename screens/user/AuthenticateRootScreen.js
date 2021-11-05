@@ -5,6 +5,7 @@ import Login from '../../components/shop/Login'
 
 const AuthenticateRootScreen = (props) => {
     const mode = props.navigation.getParam('mode')
+    
     return (
         <View style={styles.screen}>
             {mode === 'Registracija' ? <Signup navigate={props.navigation} /> : <Login navigate={props.navigation} />}

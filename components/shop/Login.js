@@ -5,13 +5,14 @@ import {Ionicons} from '@expo/vector-icons'
 import Loader from './../utils/Loader'
 import axios from 'axios'
 import {useData} from './../../context/DataContext'
+import { setAuthorizationHeader } from '../utils/StoreData'
 
 const Login = ({navigate}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [errors, setErrors] = useState({})
 
-    const {loading, setLoading} = useData()
+    const {loading, setLoading, setAuthenticated} = useData()
 
     const handleSubmit = () => {
         const data = {
@@ -23,6 +24,8 @@ const Login = ({navigate}) => {
         axios.post('/users/login', data).then(res => {
             setLoading(false)
             if(res.status === 201) {
+                setAuthorizationHeader(res.data.token)
+                setAuthenticated(true)
                 Alert.alert('Dobrodošli nazad', 'Dobrodošli nazad na Zh Zola shop.', [{text: 'Ok', style: 'default'}])
                 navigate.navigate('Products')
             }

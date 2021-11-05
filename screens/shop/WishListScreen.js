@@ -1,20 +1,19 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
-import { Text } from '@ui-kitten/components'
+import { View, StyleSheet, Text } from 'react-native'
+import {PRODUCTS} from '../../data/dummyData'
+import Products from '../../components/shop/Products'
 
-const WishListScreen = () => {
+const WishListScreen = (props) => {
     return (
         <View style={styles.screen}>
-            <Text>WishListScreen</Text>
+            <Products data={PRODUCTS.filter(p => p.mainCategory === 'Kompresori')} navigation={props.navigation} />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        flex: 1
     }
 })
 

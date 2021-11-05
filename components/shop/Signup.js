@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons'
 import axios from 'axios'
 import Loader from './../utils/Loader'
 import {useData} from './../../context/DataContext'
+import { setAuthorizationHeader } from '../utils/StoreData'
 
 const Signup = ({ navigate }) => {
     const [name, setName] = useState('')
@@ -13,7 +14,7 @@ const Signup = ({ navigate }) => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [errors, setErrors] = useState({})
 
-    const {loading, setLoading} = useData()
+    const {loading, setLoading, setAuthenticated} = useData()
 
     const handleSubmit = () => {
         const data = {
@@ -26,7 +27,10 @@ const Signup = ({ navigate }) => {
         setLoading(true)
         axios.post('/users/signup', data).then(res => {
             setLoading(false)
+            // console.log(res.data)
             if(res.status === 201) {
+                setAuthorizationHeader(res.data.token)
+                setAuthenticated(true)
                 Alert.alert('Registracija uspješna', 'Uspješno ste se registrovali na ZhZola Shop.', [{text: 'Ok', style: 'default'}])
                 navigate.navigate('Products')
             }

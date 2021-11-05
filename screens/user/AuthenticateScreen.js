@@ -2,8 +2,23 @@ import React from 'react'
 import { View, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native'
 import { Text, Button } from '@ui-kitten/components'
 import { Ionicons } from '@expo/vector-icons'
+import { useData } from '../../context/DataContext'
 
 const AuthenticateScreen = (props) => {
+    const {authenticated, logout} = useData()
+
+    const IsLogedInBtn = () => (
+        <TouchableWithoutFeedback style={styles.signInBox} onPress={() => logout(props.navigation)}>
+            <Text style={styles.signInText}>Odjava</Text>
+        </TouchableWithoutFeedback>
+    )
+
+    const onHandleAuthenticated = () => {
+        if(!authenticated) {
+            props.navigation.navigate('LoginSignup')
+        }
+    }
+    
     return (
         <View style={styles.screen}>
             <View style={styles.mainContainer}>
@@ -11,12 +26,13 @@ const AuthenticateScreen = (props) => {
                     <View style={styles.imgBox}>
                         <Image style={styles.img} source={require('./../../assets/default-profile.png')} />
                     </View>
+                    {!authenticated ?
                     <TouchableWithoutFeedback onPress={() => props.navigation.navigate('LoginSignup')} style={styles.signInBox}>
                         <Text style={styles.signInText}>Prijava</Text>
-                    </TouchableWithoutFeedback>
+                    </TouchableWithoutFeedback> : <IsLogedInBtn />}
                 </View>
 
-                <TouchableWithoutFeedback onPress={() => props.navigation.navigate('LoginSignup')}>
+                <TouchableWithoutFeedback onPress={() => onHandleAuthenticated()}>
                     <View style={styles.ordersContainer}>
                         <View style={styles.ordersTitleFlex}>
                             <Text category="h6" style={{ fontWeight: 'bold' }}>

@@ -1,5 +1,8 @@
-import React, {useContext, useState, useCallback} from 'react'
+import React, { useContext, useState, useCallback } from 'react'
 import { PRODUCTS } from '../data/dummyData'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import { StackActions, NavigationActions } from 'react-navigation';
 
 const DataContext = React.createContext()
 
@@ -7,7 +10,9 @@ export const useData = () => {
     return useContext(DataContext)
 }
 
-const DataContextProvider = ({children}) => {
+const DataContextProvider = ({ children }) => {
+    const [authenticated, setAuthenticated] = useState(true)
+    const [showGateway, setShowGateway] = useState(false)
     const [products, setProducts] = useState(PRODUCTS)
     const [cart, setCart] = useState([])
     const [totalAmount, setTotalAmount] = useState(0)
@@ -21,7 +26,7 @@ const DataContextProvider = ({children}) => {
         const selectedProduct = products[selectedProductIndex]
 
         // 3) If the product is already in cart, do not add it
-        if(selectedProduct.inCart === true) return
+        if (selectedProduct.inCart === true) return
 
         // 4) Change its "inCart" propery for button disabling
         selectedProduct.inCart = true
@@ -53,7 +58,7 @@ const DataContextProvider = ({children}) => {
         const copyCart = [...cart]
 
         const selectedProduct = copyCart.find(p => p.id === id)
-        if(selectedProduct.quantity <= 1) return 
+        if (selectedProduct.quantity <= 1) return
         selectedProduct.quantity = selectedProduct.quantity - 1
         calculateTotalAmount()
 
@@ -61,7 +66,7 @@ const DataContextProvider = ({children}) => {
     }
 
     const calculateTotalAmount = useCallback(() => {
-        if(cart.length === 0) {
+        if (cart.length === 0) {
             setTotalAmount(0)
             return
         }
@@ -80,26 +85,48 @@ const DataContextProvider = ({children}) => {
 
         // 1) Find indexes of products that are just deleted and restore their inCart state
         const deletedProductIndexes = products.map((p, i) => {
-            if(p.inCart === true) {
+            if (p.inCart === true) {
                 return i
             }
         }).filter(el => el !== undefined)
-        
+
         deletedProductIndexes.map(dpi => {
             const copyProducts = [...products]
 
-            if(copyProducts[dpi].selected) {
+            if (copyProducts[dpi].selected) {
                 copyProducts[dpi].inCart = false
                 setProducts(copyProducts)
             }
-            
+
         })
 
         setCart(updatedCart)
         calculateTotalAmount()
     }
 
+    const resetAction = StackActions.reset({
+        index: 0,
+        actions: [NavigationActions.navigate({ routeName: 'LoginSignup' })]
+    })
+
+    const logout = async (navigation) => {
+        setLoading(true)
+
+        try {
+            await AsyncStorage.removeItem('token')
+            setAuthenticated(false)
+            delete axios.defaults.headers.common['Authorization']
+            navigation.navigate('LoginSignup')
+            setLoading(false)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     const value = {
+        authenticated,
+        setAuthenticated,
+        logout,
         products,
         cart,
         setCart,
@@ -110,7 +137,10 @@ const DataContextProvider = ({children}) => {
         calculateTotalAmount,
         deleteSelectedFromCart,
         loading,
-        setLoading
+        setLoading,
+        showGateway,
+        setShowGateway,
+        resetAction
     }
 
     return (

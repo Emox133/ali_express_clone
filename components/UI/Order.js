@@ -4,7 +4,7 @@ import { Text } from '@ui-kitten/components'
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { useData } from './../../context/DataContext'
 import OrderItem from '../shop/OrderItem'
-import PayPalPayment from './../shop/PayPalPayment'
+import PaypalScreen from './../shop/PayPalPayment'
 
 const Order = () => {
     const { cart, totalAmount } = useData()
@@ -60,7 +60,7 @@ const Order = () => {
                             <Text style={{ fontWeight: 'bold' }}>${total}</Text>
                         </View>
                     </View>
-                    <PayPalPayment />
+                    <PaypalScreen />
                 </View>
             </ScrollView>
         </>

@@ -2,9 +2,14 @@ import React from 'react'
 import { View, StyleSheet, Dimensions } from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
 import { Text, Button } from '@ui-kitten/components'
+import { useData } from '../../context/DataContext'
+import Loader from './../../components/utils/Loader'
 
 const RegisterOrSignup = (props) => {
+    const {loading} = useData()
+
     return (
+        !loading ?
         <View style={styles.mainContainer}>
             <View style={styles.closeWindowContainer}>
                 <Ionicons onPress={() => props.navigation.goBack()} name="close-circle-outline" size={23} color="#e52613" />
@@ -23,7 +28,7 @@ const RegisterOrSignup = (props) => {
                     <Button style={styles.btn} status="info" onPress={() => props.navigation.navigate('AuthenticateRoot', {mode: 'Prijava'})}>PRIJAVA</Button>
                 </View>
             </View>
-        </View>
+        </View> : <Loader />
     )
 }
 

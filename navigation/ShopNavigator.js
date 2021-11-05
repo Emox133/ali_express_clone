@@ -1,5 +1,5 @@
 import React from 'react'
-import {createAppContainer} from 'react-navigation'
+import {createAppContainer, createSwitchNavigator} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
@@ -27,13 +27,15 @@ import RegisterOrSignupScreen from '../screens/user/RegisterOrSignupScreen'
 import AuthenticateRootScreen from '../screens/user/AuthenticateRootScreen'
 
 const CartStackNavigator = createStackNavigator({
-    Cart: CartScreen,
+    Cart: {
+        screen: CartScreen
+    },
     Checkout: {
         screen: CheckoutScreen
     },
 })
 
-const AuthenticationNavigator = createStackNavigator({
+export const AuthenticationNavigator = createStackNavigator({
     Authenticate: {
         screen: AuthenticateScreen,
         navigationOptions: {headerShown: false}
@@ -95,7 +97,7 @@ const ShopNavigator = createStackNavigator({
     },
 })
 
-const ShopTabNavigator = createMaterialBottomTabNavigator({
+ export const ShopTabNavigator = createMaterialBottomTabNavigator({
     Home: {
         screen: ShopNavigator,
         navigationOptions: {
@@ -152,4 +154,4 @@ const ShopTabNavigator = createMaterialBottomTabNavigator({
     }
 })
 
-export default createAppContainer(ShopTabNavigator)
+// export default createAppContainer(RootNavigator)

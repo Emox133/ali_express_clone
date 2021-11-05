@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
+import { withNavigation } from 'react-navigation';
 import {
   SafeAreaView,
   StyleSheet,
@@ -11,14 +12,17 @@ import {
 } from 'react-native';
 import {WebView} from 'react-native-webview';
 import Feather from 'react-native-vector-icons/Feather';
+import { useData } from '../../context/DataContext';
 
-const App = () => {
-  const [showGateway, setShowGateway] = useState(false);
+const PaypalScreen = () => {
+  const {showGateway, setShowGateway} = useData();
   const [prog, setProg] = useState(false);
   const [progClr, setProgClr] = useState('#000');
+  const webviewRef = useRef()
 
   function onMessage(e) {
     let data = e.nativeEvent.data;
+    // console.log(e)
     setShowGateway(false);
     console.log(data)
 
@@ -28,6 +32,12 @@ const App = () => {
     } else {
       Alert.alert('Plaćanje neuspiješno.', 'Molimo vas pokušajte ponovo.', [{style: 'default', text: 'Ok', }])
     }
+  }
+
+  const sendPostMessage = () => {
+    console.log('Sending post message')
+    webviewRef.current.postMessage('Hello from react native')
+    console.log(webviewRef.current.postMessage)
   }
 
   return (
@@ -71,6 +81,7 @@ const App = () => {
             </View>
             <WebView
               source={{uri: 'https://gateway-gamma.vercel.app/'}}
+              // source={{uri: 'http://192.168.100.14:3000/'}}
               style={{flex: 1}}
               onLoadStart={() => {
                 setProg(true);
@@ -81,12 +92,13 @@ const App = () => {
                 setProgClr('#00457C');
               }}
               onLoadEnd={() => {
-                setProg(false);
+                setProg(false)
               }}
               onLoad={() => {
                 setProg(false);
               }}
               onMessage={onMessage}
+              ref={webviewRef}
             />
           </View>
         </Modal>
@@ -132,4 +144,4 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
 });
-export default App;
+export default withNavigation(PaypalScreen);

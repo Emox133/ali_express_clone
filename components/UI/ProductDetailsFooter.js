@@ -6,7 +6,7 @@ import { useData } from '../../context/DataContext'
 
 // BEWARE THIS COMPONENT IS NOT FINISHED YET
 const ProductDetailsFooter = ({product}) => {
-    const {addProductToCart} = useData()
+    const {addProductToCart, setShowGateway} = useData()
     const {id, inCart} = product.item
 
     return (
@@ -28,7 +28,7 @@ const ProductDetailsFooter = ({product}) => {
                         <Button disabled={inCart} appearance="filled" status="primary" size="small" style={styles.classicBtnSoft} onPress={() => addProductToCart(id)}>{inCart ? 'U KORPI' : 'DODAJ U KORPU'}</Button>
                     </View>
                     <View style={styles.classicBtnWrapper}>
-                        <Button appearance="filled" status="info" size="small" style={styles.classicBtnStrong}>KUPI ODMAH</Button>
+                        <Button appearance="filled" status="info" size="small" style={styles.classicBtnStrong} onPress={() => setShowGateway(true)}>KUPI ODMAH</Button>
                     </View>
                 </View>
             </View>
